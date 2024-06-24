@@ -1,13 +1,16 @@
 const fs = require("fs");
-const Encryption = require("./encryption");
+const { encodeWithSecret, decodeWithSecret } = require("./encryption");
 
-const encryption = new Encryption();
+let message = "berhasil...";
+console.log("NodeJS Message:", message);
 
-const message = "mantap...";
-const encrypted = encryption.encodeWithSecret(message);
-console.log({ encrypted });
-const decrypted = encryption.decodeWithSecret(encrypted);
-console.log({ decrypted });
+// ============================================================
+// ============================================================
+
+let ciphertext = encodeWithSecret(message);
+console.log("NodeJS Encode:", ciphertext);
+let decoded = decodeWithSecret(ciphertext);
+console.log("NodeJS Decode:", decoded);
 
 // Baca isi file encrypted.txt
 fs.readFile("encrypted.txt", "utf8", (err, data) => {
@@ -17,6 +20,12 @@ fs.readFile("encrypted.txt", "utf8", (err, data) => {
   }
 
   // Dekripsi isi file
-  const decrypted = encryption.decodeWithSecret(data.trim());
+  const decrypted = decodeWithSecret(data.trim());
   console.log("Pesan setelah didekripsi:", decrypted);
 });
+
+// ============================================================
+// ============================================================
+
+// ============================================================
+// ============================================================
